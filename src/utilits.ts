@@ -2,14 +2,22 @@ import { decode } from "next-auth/jwt";
 import { cookies } from "next/headers";
 
 export async function getMytoken() {
-  const cookie = await cookies();
-  const myToken = cookie.get("next-auth.session-token")?.value;
-  const decodedToken = await decode({
-    token: myToken,
-    secret: process.env.NEXTAUTH_SECRET!,
-  });
+  try {
+    const cookieStore = await cookies();
+    const sessionToken = cookieStore.get("next-auth.session-token")?.value;
 
-  const token = decodedToken?.usetoken;
+    if (!sessionToken) {
+      return null;
+    }
 
-  return token
+    const decodedToken = await decode({
+      token: sessionToken,
+      secret: process.env.NEXTAUTH_SECRET!,
+    });
+
+    return decodedToken?.token as string | null;
+  } catch (error) {
+    console.error("Error decoding token:", error);
+    return null;
+  }
 }

@@ -3,20 +3,14 @@ import Credentials from "next-auth/providers/credentials";
 import { jwtDecode } from "jwt-decode";
 
 export const authOptions: NextAuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,   // ← مهم جداً
+
   providers: [
     Credentials({
       name: "Credentials",
       credentials: {
-        email: {
-          label: "email",
-          placeholder: "enter your email",
-          type: "email",
-        },
-        password: {
-          label: "password",
-          placeholder: "enter your password",
-          type: "password",
-        },
+        email: { label: "email", type: "email" },
+        password: { label: "password", type: "password" },
       },
 
       async authorize(credentials) {
@@ -29,52 +23,55 @@ export const authOptions: NextAuthOptions = {
                 email: credentials?.email,
                 password: credentials?.password,
               }),
-              headers: {
-                "content-type": "application/json",
-              },
-            },
+              headers: { "content-type": "application/json" },
+            }
           );
 
           const result = await res.json();
 
           if (!res.ok) {
-            throw new Error(result.message || "invalid Login");
+            throw new Error(result.message || "Invalid email or password");
           }
-          console.log("result authorization", result);
 
-          const jwt: { id: string } = jwtDecode(result.token);
-          console.log(jwt);
+          const decoded: { id: string } = jwtDecode(result.token);
 
           return {
-            id: jwt.id,
+            id: decoded.id,
             name: result.user.name,
             email: result.user.email,
             token: result.token,
           };
-        } catch (err) {
-          throw new Error((err as Error).message);
+        } catch (err: any) {
+          console.error("Authorize Error:", err.message); // مهم للـ Logs
+          throw new Error(err.message);
         }
       },
     }),
   ],
 
   callbacks: {
-    jwt(params) {
-      if (params.user) {
-        ((params.token.usetoken = params.user.token),
-          (params.token.id = params.user.id));
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;         
+        token.token = user.token;     
       }
-
-      return params.token;
+      return token;
     },
-    session(param){
-      param.session.id = param.token.id;
 
-
-      return param.session
-    }
+    async session({ session, token }) {
+      if (token) {
+        session.user.id = token.id as string;
+        session.user.token = token.token as string;   
+      }
+      return session;
+    },
   },
+
   pages: {
     signIn: "/login",
+  },
+
+  session: {
+    strategy: "jwt",   
   },
 };
