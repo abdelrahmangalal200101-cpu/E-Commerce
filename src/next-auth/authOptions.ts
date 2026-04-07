@@ -3,7 +3,7 @@ import Credentials from "next-auth/providers/credentials";
 import { jwtDecode } from "jwt-decode";
 
 export const authOptions: NextAuthOptions = {
-  secret: process.env.NEXTAUTH_SECRET,   // ← مهم جداً
+  secret: process.env.NEXTAUTH_SECRET,   
 
   providers: [
     Credentials({

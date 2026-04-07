@@ -11,12 +11,9 @@ import { MdExpandMore, MdShoppingCart } from "react-icons/md";
 import { Order } from "@/types/Products";
 import OrdersCards from "../_components/Shared/orders/Orders";
 
-
-
-
 export default function Page() {
-  const { data } = useSession();
-  const id = data?.id;
+  const { data: session } = useSession();
+  const id = session?.user.id;
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -25,16 +22,18 @@ export default function Page() {
     myOrders(id).then((res) => {
       if (res) setOrders(res);
       console.log(res);
-      
+
       setLoading(false);
     });
   }, [id]);
 
   return (
     <div className="w-full px-6 lg:px-10 py-8">
-
       <div className="flex items-center gap-2 text-sm text-gray-400 mb-6">
-        <Link href="/" className="hover:text-homeGreen transition-colors duration-200">
+        <Link
+          href="/"
+          className="hover:text-homeGreen transition-colors duration-200"
+        >
           Home
         </Link>
         <span>/</span>
@@ -50,7 +49,9 @@ export default function Page() {
             <h1 className="text-2xl font-bold text-gray-800">My Orders</h1>
             <p className="text-sm text-gray-400 mt-0.5">
               Track and manage your{" "}
-              <span className="text-homeGreen font-semibold">{orders.length}</span>{" "}
+              <span className="text-homeGreen font-semibold">
+                {orders.length}
+              </span>{" "}
               orders
             </p>
           </div>
@@ -67,7 +68,10 @@ export default function Page() {
       {loading ? (
         <div className="flex flex-col gap-4">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="h-28 rounded-2xl bg-gray-100 animate-pulse" />
+            <div
+              key={i}
+              className="h-28 rounded-2xl bg-gray-100 animate-pulse"
+            />
           ))}
         </div>
       ) : orders.length === 0 ? (
