@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛍️ Blush — Full E-Commerce Experience (Frontend)
 
-## Getting Started
+A fully functional, production-style e-commerce web application built to simulate a real-world online store experience from landing page to checkout and payment.
 
-First, run the development server:
+🔗 Live Demo: https://e-commerce-blush-nu-35.vercel.app
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Framework:** Next.js
+- **Styling:** Tailwind CSS
+- **State Management:** React Context API
+- **Authentication:** NextAuth.js
+- **Payments:** Stripe + Cash on Delivery
+- **Deployment:** Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## ✨ Features
 
-To learn more about Next.js, take a look at the following resources:
+### 👤 Authentication
+- User Registration & Login using NextAuth
+- Forget / Reset Password flow
+- Secure session handling
+- User profile page
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 🛒 Shopping Experience
+- Add to Cart
+- Wishlist system
+- Product Search
+- Advanced Filters
+- Categories
+- Fully responsive UI
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 💳 Checkout & Payments
+- Stripe payment integration
+- Cash on Delivery option
+- Complete checkout flow
 
-## Deploy on Vercel
+### ⚙️ Architecture
+- Clean folder structure
+- Reusable components
+- Global state handled with Context API
+- Proper environment variables management for secure auth in production
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🎯 Project Goal
+
+This project was built to replicate a **real-world e-commerce architecture** focusing on:
+
+- Production-level folder structure
+- Authentication flow in Next.js apps
+- State management without external libraries
+- Real payment integration
+- Deployment challenges with environment variables and NextAuth
+
+---
+
+## 🧠 Biggest Challenges
+
+> The most challenging part of this project was handling **NextAuth configuration** and **environment variables during Vercel deployment**, especially managing:
+>
+> - `NEXTAUTH_SECRET`
+> - `NEXTAUTH_URL`
+>
+> Ensuring authentication works correctly in production required deep understanding of how NextAuth behaves across environments.
+
+---
+
+## 🔐 Environment Variables
+
+To run this project locally or deploy it correctly, you must configure the following environment variables.
+
+Create a `.env.local` file in the root directory:
+
+```env
+NEXTAUTH_SECRET=your_secret_key
+NEXTAUTH_URL=http://localhost:3000
