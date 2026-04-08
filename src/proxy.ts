@@ -13,11 +13,16 @@ export async function proxy(request: NextRequest) {
   const authRoutes = ["/login", "/register"];
 
   const myPath = request.nextUrl.pathname;
-  const MyToken = await getToken({
-    req: request,
-    secret: process.env.NEXTAUTH_SECRET,
-    secureCookie: process.env.NODE_ENV === "production",
-  });
+  
+const MyToken = await getToken({
+  req: request,
+  secret: process.env.NEXTAUTH_SECRET,
+  cookieName:
+    process.env.NODE_ENV === "production"
+      ? "__Secure-next-auth.session-token"
+      : "next-auth.session-token",
+});
+  
   const token = MyToken?.userToken;
 
   console.log("MyToken", MyToken);
