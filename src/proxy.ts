@@ -20,6 +20,9 @@ export async function proxy(request: NextRequest) {
   });
   const token = MyToken?.userToken;
 
+  console.log("MyToken", MyToken);
+console.log("userToken", MyToken?.userToken);
+
   if (!token && protectedRoutes.some((path) => myPath.startsWith(path))) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
