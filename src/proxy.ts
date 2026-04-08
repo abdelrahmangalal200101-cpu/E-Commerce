@@ -18,7 +18,7 @@ export async function proxy(request: NextRequest) {
     secret: process.env.NEXTAUTH_SECRET,
     secureCookie: process.env.NODE_ENV === "production",
   });
-  const token = MyToken?.usetoken;
+  const token = MyToken?.userToken;
 
   if (!token && protectedRoutes.some((path) => myPath.startsWith(path))) {
     return NextResponse.redirect(new URL("/login", request.url));
