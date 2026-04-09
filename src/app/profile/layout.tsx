@@ -41,7 +41,7 @@ export default function layout({ children }: { children: React.ReactNode }) {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
           className="rounded-[20px] p-5 border border-[#F3F4F6] shadow-[0px_1px_2px_-1px_#0000001A,0px_1px_3px_0px_#0000001A] 
-                     w-full lg:w-56 shrink-0"
+                     w-full lg:w-1/4 shrink-0"
         >
           <div className="mb-5 pb-4 border-b border-gray-100">
             <p className="text-[11px] font-semibold uppercase tracking-widest text-gray-400 mb-1">
@@ -96,7 +96,7 @@ export default function layout({ children }: { children: React.ReactNode }) {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.15 }}
-          className="w-full lg:flex-1 min-w-0"
+          className="w-full lg:w-3/4 min-w-0"
         >
           {children}
         </motion.div>
