@@ -34,7 +34,7 @@ export default function layout({ children }: { children: React.ReactNode }) {
         Icon={FaUser}
         sContent="Profile"
       />
-      <div className="py-10 px-4 sm:px-6 flex flex-col lg:flex-row gap-6 lg:gap-8 items-start justify-center w-full max-w-6xl mx-auto">
+      <div className="py-10 px-8 sm:px-6 flex flex-col lg:flex-row gap-6 lg:gap-8 items-start w-full">
         
         <motion.div
           initial={{ opacity: 0, x: -20 }}
