@@ -150,12 +150,12 @@ function WishCard({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, x: -40 }}
       transition={{ duration: 0.25 }}
-      className="bg-white rounded-2xl p-4 flex gap-4 items-center"
+      className="bg-white rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 items-start sm:items-center"
       style={{
         boxShadow: "0px 1px 3px 0px #0000001A, 0px 1px 2px -1px #0000001A",
       }}
     >
-      <div className="w-24 h-24 rounded-xl overflow-hidden bg-gray-50 shrink-0">
+      <div className="w-full sm:w-24 h-48 sm:h-24 rounded-xl overflow-hidden bg-gray-50 shrink-0">
         <img
           src={item.imageCover}
           alt={item.title}
@@ -163,7 +163,7 @@ function WishCard({
         />
       </div>
 
-      <div className="flex flex-col gap-1 flex-1 min-w-0">
+      <div className="flex flex-col gap-1.5 flex-1 min-w-0 px-1">
         <p className="text-xs text-gray-400 truncate">{item.category?.name}</p>
         <h3 className="text-sm font-semibold text-gray-800 line-clamp-2 leading-snug">
           {item.title}
@@ -192,11 +192,11 @@ function WishCard({
         </span>
       </div>
 
-      <div className="flex flex-col gap-2 shrink-0">
+      <div className="flex flex-row sm:flex-col gap-2 w-full sm:w-auto shrink-0">
         <button
           onClick={() => handleAddtoCart(item._id)}
           disabled={addingToCart || !inStock}
-          className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs
+          className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs
                     font-semibold text-white transition-all duration-200
                     hover:opacity-90 active:scale-[0.97] cursor-pointer
                     disabled:opacity-60 disabled:cursor-not-allowed"
@@ -238,7 +238,7 @@ function WishCard({
         <button
           onClick={() => handleDeleteWish(item._id)}
           disabled={deleting}
-          className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs
+          className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs
                     font-medium text-red-500 border border-red-100 bg-red-50
                     hover:bg-red-500 hover:text-white hover:border-red-500
                     transition-all duration-200 cursor-pointer
