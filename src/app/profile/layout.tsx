@@ -34,21 +34,21 @@ export default function layout({ children }: { children: React.ReactNode }) {
         Icon={FaUser}
         sContent="Profile"
       />
-
-      <div className="py-10 px-6 flex gap-8 items-start justify-center w-full">
+      <div className="py-10 px-4 sm:px-6 flex flex-col lg:flex-row gap-6 lg:gap-8 items-start justify-center w-full max-w-6xl mx-auto">
+        
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
-          className="rounded-[20px] p-6 border border-[#F3F4F6] shadow-[0px_1px_2px_-1px_#0000001A,0px_1px_3px_0px_#0000001A] w-1/5 shrink-0"
+          className="rounded-[20px] p-5 border border-[#F3F4F6] shadow-[0px_1px_2px_-1px_#0000001A,0px_1px_3px_0px_#0000001A] 
+                     w-full lg:w-56 shrink-0"
         >
-          <div className="mb-6 pb-5 border-b border-gray-100">
+          <div className="mb-5 pb-4 border-b border-gray-100">
             <p className="text-[11px] font-semibold uppercase tracking-widest text-gray-400 mb-1">
               My Account
             </p>
           </div>
-
-          <nav className="flex flex-col gap-1.5">
+          <nav className="flex flex-row lg:flex-col gap-1.5 overflow-x-auto lg:overflow-visible pb-1 lg:pb-0">
             {navItems.map(({ label, href, icon: Icon }, i) => {
               const isActive = pathname === href || pathname.startsWith(href);
               return (
@@ -57,10 +57,11 @@ export default function layout({ children }: { children: React.ReactNode }) {
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.08 + 0.2, duration: 0.3 }}
+                  className="shrink-0 lg:shrink"
                 >
                   <Link
                     href={href}
-                    className={`relative flex items-center gap-3 px-4 py-3 rounded-[12px] text-sm font-medium transition-all duration-200 group
+                    className={`relative flex items-center gap-2.5 px-4 py-2.5 rounded-[12px] text-sm font-medium transition-all duration-200 group whitespace-nowrap
                       ${
                         isActive
                           ? "bg-green-50 text-green-700"
@@ -70,17 +71,13 @@ export default function layout({ children }: { children: React.ReactNode }) {
                     {isActive && (
                       <motion.span
                         layoutId="activeBar"
-                        className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-green-500 rounded-full"
-                        transition={{
-                          type: "spring",
-                          stiffness: 400,
-                          damping: 30,
-                        }}
+                        className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-green-500 rounded-full hidden lg:block"
+                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
                       />
                     )}
                     <Icon
-                      size={16}
-                      className={`transition-colors duration-200 ${
+                      size={15}
+                      className={`transition-colors duration-200 shrink-0 ${
                         isActive
                           ? "text-green-600"
                           : "text-gray-400 group-hover:text-gray-600"
@@ -94,11 +91,12 @@ export default function layout({ children }: { children: React.ReactNode }) {
           </nav>
         </motion.div>
 
+        {/* Content */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.15 }}
-          className="w-4/5"
+          className="w-full lg:flex-1 min-w-0"
         >
           {children}
         </motion.div>
